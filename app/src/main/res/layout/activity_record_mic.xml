@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnStartRecording"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🎙 Start Recording"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF0000"/>
+    <Button
+        android:id="@+id/btnPauseRecording"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⏸ Pause Recording"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF0000"/>
+
+    <Button
+        android:id="@+id/btnStopRecording"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⏹ Stop Recording"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF0000"/>
+
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textColor="#000000" />  <!-- Black color -->
+
+
+    <TextView
+        android:id="@+id/transcriptionResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🗒 Transcription will appear here..."
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:textColor="#333333" />
+    <Button
+        android:id="@+id/summarizeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Summarize"
+        android:background="@drawable/rounded_button"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

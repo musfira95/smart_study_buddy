@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <Button
+        android:id="@+id/processButton"
+        android:text="Process Audio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#4CAF50"
+        android:textColor="@android:color/white"
+        android:padding="12dp" />
+    <Button
+        android:id="@+id/viewDetailsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Uploaded File Details"
+        android:layout_marginTop="20dp"/>
+
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_marginTop="24dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:text="Transcript will appear here..."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/summarizeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Summarize"
+        android:background="@drawable/rounded_button"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"/>
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#FFFFFF">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvSummaryContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sample summary text here. This shows the summarized content of your transcription. You can scroll to read the full summary."
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:paddingBottom="20dp"/>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnGenerateQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generate Quiz"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

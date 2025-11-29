@@ -1,0 +1,41 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F3F3F3"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvRecordingName"
+            android:text="recorded_1.3gp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvRecordingDate"
+            android:text="2025-10-20"
+            android:textSize="12sp"
+            android:textColor="#666" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnPlayRecording"
+        android:src="@android:drawable/ic_media_play"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/btnDeleteRecording"
+        android:src="@android:drawable/ic_delete"
+        android:background="@android:color/transparent" />
+
+</LinearLayout>

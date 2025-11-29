@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/tvScoreTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz Result"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:paddingBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0/0"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:paddingBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/tvCorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Correct Answers: 0"
+        android:textSize="16sp"
+        android:textColor="#008000"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/tvWrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wrong Answers: 0"
+        android:textSize="16sp"
+        android:textColor="#FF0000"
+        android:paddingBottom="40dp"/>
+
+    <Button
+        android:id="@+id/btnBackToDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Dashboard"/>
+
+</LinearLayout>
