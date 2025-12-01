@@ -153,6 +153,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rows > 0;
     }
 
+    // New: check if provided email is the last admin
+    public boolean isLastAdmin(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean result = false;
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Users WHERE role='admin'", null);
+        int count = 0;
+        if (cursor != null && cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+            cursor.close();
+        }
+        // if only one admin exists, verify it's the provided email
+        if (count == 1) {
+            Cursor c2 = db.rawQuery("SELECT email FROM Users WHERE role='admin' LIMIT 1", null);
+            if (c2 != null && c2.moveToFirst()) {
+                String adminEmail = c2.getString(0);
+                result = adminEmail.equalsIgnoreCase(email);
+                c2.close();
+            }
+        }
+        db.close();
+        return result;
+    }
+
     // ✅ Insert audio file info (with current date)
     public void insertAudioFile(String fileName, String filePath) {
         SQLiteDatabase db = this.getWritableDatabase();

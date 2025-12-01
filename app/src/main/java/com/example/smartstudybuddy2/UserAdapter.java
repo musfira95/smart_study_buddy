@@ -2,11 +2,11 @@ package com.example.smartstudybuddy2;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -36,50 +36,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         UserModel user = usersList.get(position);
 
-        holder.usernameText.setText("Username: " + user.getUsername());
-        holder.emailText.setText("Email: " + user.getEmail());
-        holder.roleText.setText("Role: " + user.getRole());
+        String usernameLabel = context.getString(R.string.username_hint) + ": " + user.getUsername();
+        String emailLabel = context.getString(R.string.email_hint) + ": " + user.getEmail();
+        String roleLabel = context.getString(R.string.role_hint) + ": " + user.getRole();
+
+        holder.usernameText.setText(usernameLabel);
+        holder.emailText.setText(emailLabel);
+        holder.roleText.setText(roleLabel);
 
         // --- Edit Button ---
         holder.editBtn.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            View view = LayoutInflater.from(context).inflate(R.layout.dialog_update_user, null);
-            builder.setView(view);
-
-            EditText updateUsername = view.findViewById(R.id.updateUsername);
-            EditText updateEmail = view.findViewById(R.id.updateEmail);
-            EditText updatePassword = view.findViewById(R.id.updatePassword);
-            Button updateButton = view.findViewById(R.id.updateButton);
-
-            updateUsername.setText(user.getUsername());
-            updateEmail.setText(user.getEmail());
-            updatePassword.setText(user.getPassword());
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-            updateButton.setOnClickListener(btn -> {
-                String newUsername = updateUsername.getText().toString().trim();
-                String newEmail = updateEmail.getText().toString().trim();
-                String newPassword = updatePassword.getText().toString().trim();
-
-                if (newUsername.isEmpty() || newEmail.isEmpty() || newPassword.isEmpty()) {
-                    Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                boolean updated = dbHelper.updateUser(user.getEmail(), newEmail, newUsername, newPassword, user.getRole());
-                if (updated) {
-                    Toast.makeText(context, "User updated successfully", Toast.LENGTH_SHORT).show();
-                    user.setUsername(newUsername);
-                    user.setEmail(newEmail);
-                    user.setPassword(newPassword);
-                    notifyItemChanged(position);
-                } else {
-                    Toast.makeText(context, "Update failed", Toast.LENGTH_SHORT).show();
-                }
-                dialog.dismiss();
-            });
+            // Launch EditUserActivity with extras
+            Intent intent = new Intent(context, EditUserActivity.class);
+            intent.putExtra("email", user.getEmail());
+            intent.putExtra("username", user.getUsername());
+            intent.putExtra("role", user.getRole());
+            intent.putExtra("password", user.getPassword());
+            context.startActivity(intent);
         });
 
         // --- Delete Button ---
@@ -88,6 +61,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     .setTitle("Delete User")
                     .setMessage("Are you sure you want to delete " + user.getUsername() + "?")
                     .setPositiveButton("Yes", (dialog, which) -> {
+                        // Prevent deleting last admin
+                        if (user.getRole().equalsIgnoreCase("admin") && dbHelper.isLastAdmin(user.getEmail())) {
+                            Toast.makeText(context, "Cannot delete the last admin", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                         boolean deleted = dbHelper.deleteUser(user.getEmail());
                         if (deleted) {
                             usersList.remove(position);
@@ -100,6 +79,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     .setNegativeButton("No", null)
                     .show();
         });
+
+        // --- Manage Role Button ---
+        holder.manageRoleBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(context, RoleManagementActivity.class);
+            intent.putExtra("email", user.getEmail());
+            intent.putExtra("username", user.getUsername());
+            intent.putExtra("role", user.getRole());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -109,7 +97,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView usernameText, emailText, roleText;
-        Button editBtn, deleteBtn;
+        Button editBtn, deleteBtn, manageRoleBtn;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -118,6 +106,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             roleText = itemView.findViewById(R.id.roleText);
             editBtn = itemView.findViewById(R.id.editBtn);
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
+            manageRoleBtn = itemView.findViewById(R.id.manageRoleBtn);
         }
     }
 }

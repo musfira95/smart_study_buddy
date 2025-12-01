@@ -107,11 +107,13 @@ public class AddUserActivity extends AppCompatActivity {
             boolean inserted = dbHelper.insertUser(email, username, password, role);
             if(inserted){
                 Toast.makeText(AddUserActivity.this, "User added successfully", Toast.LENGTH_SHORT).show();
-                finish(); // go back to Admin Dashboard
-            } else {
-                // Show a friendly error on email (assuming unique constraint on email)
-                emailLayout.setError("User already exists");
-            }
+                // Open Users list so admin can see/manage users
+                startActivity(new android.content.Intent(AddUserActivity.this, UsersListActivity.class));
+                finish();
+             } else {
+                 // Show a friendly error on email (assuming unique constraint on email)
+                 emailLayout.setError("User already exists");
+             }
         });
     }
 }

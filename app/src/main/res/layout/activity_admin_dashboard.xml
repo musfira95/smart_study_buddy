@@ -8,11 +8,21 @@
 
     <Button
         android:id="@+id/addUserButton"
-        android:text="Add New User"
+        android:text="@string/add_new_user_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white" />
+
+    <!-- New: View Users button for admin -->
+    <Button
+        android:id="@+id/viewUsersButton"
+        android:text="@string/view_users_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersRecyclerView"
@@ -25,7 +35,7 @@
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/logout_btn"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white"
         android:layout_marginTop="12dp" />
